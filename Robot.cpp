@@ -1,48 +1,110 @@
 #include "Robot.h"
+#include "Weapon.h"
 
 Robot::Robot(){
     name = "Default";
     hp = 300;
     speed = 20;
     damage = 20;
+    energy = 200;
+    weapon = nullptr;
+    isSpecialActive = false;
 }
 
-Robot::Robot(std::string n, int hp, int sp, int dmg){
-    this -> name = name;
+Robot::Robot(std::string n, int hp, int sp, int dmg, int en){
+    name = n;
     this -> hp = hp;
-    this -> speed = sp;
-    this -> damage = dmg;
+    speed = sp;
+    damage = dmg;
+    energy = en;
+    weapon = nullptr;
+    isSpecialActive = false;
 }
 
 Robot::Robot(const Robot& other) {
-    this -> name = other.name;
-    this -> hp = other.hp;
-    this -> speed = other.speed;
-    this -> damage = other.damage;
+    name = other.name;
+    hp = other.hp;
+    speed = other.speed;
+    damage = other.damage;
+    energy = other.energy;
+    isSpecialActive = other.isSpecialActive;
 
-    if (other.weapon != nullptr)
-        this -> weapon = new Weapon(*other.weapon);
-    else
-        this -> weapon = nullptr;
+    weapon = other.weapon;
 }
 
 Robot& Robot::operator=(const Robot& other){
     if (this != &other){
-        delete this -> weapon;
-        this -> name = other.name;
-        this -> hp = other.hp;
-        this -> speed = other.speed;
-        this -> damage = other.damage;
+        name = other.name;
+        hp = other.hp;
+        speed = other.speed;
+        damage = other.damage;
+        energy = other.energy;
+        isSpecialActive = other.isSpecialActive;
 
-        if (other.weapon != nullptr)
-            this -> weapon = new Weapon (*other.weapon);
-        else
-            this ->weapon = nullptr;
+        weapon = other.weapon;
     }
     return *this;
 }
 
 Robot::~Robot(){
-    delete weapon;
+    weapon = nullptr;
+}
+
+std::ostream& operator<<(std::ostream& os, const Robot& r){
+    os << "Name: " << r.name << "\n";
+    os << "HP: " << r.hp << "\n";
+    os << "Damage: " << r.damage << "\n";
+    os << "Speed: " << r.speed << "\n";
+    os << "Energy: " << r.energy << "\n";
+
+    if (r.weapon)
+        os << "Weapon equipped\n";
+    else
+        os << "No weapon equipped\n";
+
+    return os;
+}
+
+std::istream& operator>>(std::istream& is, Robot& r){
+    std::cout << "Name: ";
+    is >> r.name;
+
+    std::cout << "HP: ";
+    is >> r.hp;
+
+    std::cout << "Damage: ";
+    is >> r.damage;
+
+    std::cout << "Speed: ";
+    is >> r.speed;
+
+    std::cout << "Energy: ";
+    is >> r.energy;
+
+    return is;
+}
+
+void Robot::takeDamage(int amount){
+    hp -= amount;
+    if (hp < 0) hp = 0;
+ }
+
+void Robot::recoverEnergy(int amount){
+    energy+=amount;
+}
+
+void Robot::equipWeapon(Weapon* w){
+    weapon = w;
+}
+
+void Robot::saveToFile(std::ostream& out) const {
+    out << name << "\n";
+    out << hp << " " << damage << " " << speed << " " << energy << "\n";
+
+}
+
+void Robot::loadFromFile(std::istream& in){
+    in >> name;
+    in >> hp >> damage >> speed >> energy;
 }
 
