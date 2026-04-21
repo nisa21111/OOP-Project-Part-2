@@ -15,7 +15,7 @@ Tank& Tank::operator=(const Tank& other){
 
 Tank::~Tank(){}
 
-std::ostream& operator<<(std::ostream os, const Tank& t){
+std::ostream& operator<<(std::ostream& os, const Tank& t){
     os << (const Robot&)t;
     return os;
 }
