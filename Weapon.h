@@ -1,21 +1,22 @@
 #ifndef WEAPON_H
 #define WEAPON_H
 
+
 #include <iostream>
 #include <string>
 #include <fstream>
 
+class Robot;
 
 class Weapon {
 protected:
     std::string name;
     int damage;
     int energyCost;
-    bool usedOnce;
 
 public:
     Weapon();
-    Weapon(std::string name, int dmg, int ec, int otu);
+    Weapon(std::string name, int dmg, int ec);
     virtual ~Weapon();
     Weapon(const Weapon& other);
     Weapon& operator=(const Weapon& other);
@@ -55,6 +56,8 @@ public:
 };
 
 class RocketLauncher : public Weapon{
+private:
+    bool used;
 public:
     RocketLauncher();
     RocketLauncher(std::string name);
