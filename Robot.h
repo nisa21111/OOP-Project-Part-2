@@ -38,6 +38,9 @@ public:
     std::string getName() const {return name; }
     int getEenergy() const {return energy; }
     Weapon* getWeapon() const {return weapon; }
+    int getSpeed() const {return speed;}
+    int getDamage() const {return damage;}
+    virtual std::string getType() const = 0;
 
 };
 

@@ -19,6 +19,8 @@ public:
 
     void attack(Robot& enemy) override;
     void useSpecialAbility() override;
+
+    std::string getType() const override {return "Sniper";}
 };
 
 #endif

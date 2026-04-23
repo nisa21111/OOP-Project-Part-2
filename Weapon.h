@@ -27,6 +27,8 @@ public:
     virtual void use(Robot& attacker, Robot& enemy) = 0;
 
     std::string getName() const {return name;}
+    int getDamage() const {return damage;}
+    int getEnergyCost() const {return energyCost;}
 };
 
 class LaserGun : public Weapon {

@@ -20,6 +20,8 @@ public:
     void attack(Robot& enemy) override;
     void useSpecialAbility () override;
     void takeDamage(int amount) override;
+
+    std::string getType() const override {return "Sniper";}
 };
 
 #endif
