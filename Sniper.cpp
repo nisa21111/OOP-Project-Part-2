@@ -41,13 +41,14 @@ void Sniper::attack(Robot& enemy){
     }
     energy -= 10;
     if (isSpecialActive){
-        enemy.takeDamage(damage*2);
-        std::cout << name << " deals double damage! Enemy is hit for " << damage*2 << "!\n";
+        int crit = damage*2;
+        enemy.takeDamage(crit);
+        std::cout << name << " deals double damage! " << enemy.getName() << " is hit for " << damage*2 << "!\n";
         isSpecialActive = false;
     }
     else{
         enemy.takeDamage(damage);
-        std::cout << name << " attacks for " << damage << " damage!\n";
+        std::cout << name << " attacks " << enemy.getName() << " for " << damage << " damage!\n";
     }
 }
 
@@ -59,5 +60,5 @@ void Sniper::useSpecialAbility(){
 
     energy -= 40;
     isSpecialActive = true;
-    std::cout << "Next attack will deal double damage!\n";
+    std::cout << name << " activates Crit!. Next attack will deal double damage!\n";
 }

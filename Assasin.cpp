@@ -42,10 +42,10 @@ void Assasin::attack(Robot& enemy){
     }
     energy -= 10;
     enemy.takeDamage(damage);
-    std::cout << name << " attacks for "<< damage << " damage!\n";
+    std::cout << name << " attacks " << enemy.getName() << " for "<< damage << " damage!\n";
     if (isSpecialActive == true){
         enemy.takeDamage(damage);
-        std::cout << name << " deals the second attack for " << damage << " damage!\n";
+        std::cout << name << " deals the second attack to " << enemy.getName() << " for " << damage << " damage!\n";
         isSpecialActive = false;
     }
 }
@@ -58,5 +58,5 @@ void Assasin::useSpecialAbility(){
 
     energy -= 40;
     isSpecialActive = true;
-    std::cout << "Next attack will be double!\n";
+    std::cout << name << "Activates Dash! Next attack will be double!\n";
 }

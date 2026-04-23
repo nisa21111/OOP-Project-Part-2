@@ -21,4 +21,4 @@ public:
     void useSpecialAbility() override;
 };
 
-#endif;
+#endif

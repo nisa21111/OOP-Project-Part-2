@@ -42,7 +42,7 @@ void Tank::attack(Robot& enemy){
 
     energy -= 10;
     enemy.takeDamage(damage);
-    std::cout << name << " attacks for " << damage << " damage!\n";
+    std::cout << name << " attacks " << enemy.getName() << " for " << damage << " damage!\n";
 }
 
 void Tank::useSpecialAbility(){
@@ -58,7 +58,7 @@ void Tank::useSpecialAbility(){
 }
 
 void Tank::takeDamage(int amount){
-    if (isSpecialActive = true){
+    if (isSpecialActive == true){
         amount /= 2;
         isSpecialActive = false;
     }

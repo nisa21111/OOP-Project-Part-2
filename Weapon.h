@@ -35,6 +35,7 @@ public:
     LaserGun(std::string name);
     LaserGun(const LaserGun& other);
     LaserGun& operator=(const LaserGun& other);
+    ~LaserGun();
 
     friend std::ostream& operator<<(std::ostream& os, const LaserGun& l);
     friend std::istream& operator>>(std::istream& in, LaserGun& l);
@@ -48,6 +49,7 @@ public:
     Crossbow(std::string name);
     Crossbow(const Crossbow& other);
     Crossbow& operator=(const Crossbow& other);
+    ~Crossbow();
 
     friend std::ostream& operator<<(std::ostream& os, const Crossbow& c);
     friend std::istream& operator>>(std::istream& in, Crossbow& c);
@@ -63,6 +65,7 @@ public:
     RocketLauncher(std::string name);
     RocketLauncher(const RocketLauncher& other);
     RocketLauncher& operator=(const RocketLauncher& other);
+    ~RocketLauncher();
 
     friend std::ostream& operator<<(std::ostream& os, const RocketLauncher& rl);
     friend std::istream& operator>>(std::istream& in, RocketLauncher& rl);
