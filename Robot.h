@@ -41,6 +41,8 @@ public:
     int getSpeed() const {return speed;}
     int getDamage() const {return damage;}
     virtual std::string getType() const = 0;
+    bool hasSpecialActive() const {return isSpecialActive;}
+    void resetSpecialAbility() {isSpecialActive = false;}
 
 };
 

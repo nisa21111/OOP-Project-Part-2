@@ -22,4 +22,4 @@ int main(){
     return 0;
 }
 
-// spec ability assasin//some msg//validator//show hp7
+//save // edge cases //weapon extend//make robot based on class(change string == la extra turn si spec ability in arena)??meniul principal si enemy robot select (in main)
