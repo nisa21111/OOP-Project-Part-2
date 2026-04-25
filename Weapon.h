@@ -29,6 +29,8 @@ public:
     std::string getName() const {return name;}
     int getDamage() const {return damage;}
     int getEnergyCost() const {return energyCost;}
+    virtual std::string getWepType() = 0;
+    virtual bool isUsed() const {return false;}
     virtual void specialEffect(Robot& attacker, Robot& enemy){}
 };
 
@@ -45,6 +47,7 @@ public:
 
     void use(Robot& attacker, Robot& enemy) override;
     void specialEffect (Robot& attacker, Robot& enemy) override;
+    std::string getWepType() override {return "LaserGun";}
 };
 
 class Crossbow : public Weapon{
@@ -60,6 +63,7 @@ public:
 
     void use(Robot& attacker, Robot& enemy) override;
     void specialEffect(Robot& attacker, Robot& enemy) override;
+    std::string getWepType() override {return "Crossbow";}
 };
 
 class RocketLauncher : public Weapon{
@@ -76,6 +80,8 @@ public:
     friend std::istream& operator>>(std::istream& in, RocketLauncher& rl);
 
     void use(Robot& attacker, Robot& enemy) override;
+    bool isUsed() const override {return used;}
+    std::string getWepType() override {return "RocketLauncher";}
 };
 
 

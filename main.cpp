@@ -96,8 +96,11 @@ int main(){
                 Arena arena(player, enemy);
                 arena.start();
 
+                delete player;
+                player = nullptr;
+
                 delete enemy;
-                delete enemyWeapon;
+                enemy = nullptr;
                 break;
             }
             case 4:{
@@ -119,4 +122,4 @@ int main(){
     return 0;
 }
 
-//save // edge cases //weapon extend//make robot based on class(change string == la extra turn si spec ability in arena)??meniul principal si enemy robot select (in main)
+//save // edge cases //make robot based on class

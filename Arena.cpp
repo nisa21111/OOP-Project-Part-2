@@ -144,8 +144,16 @@ void Arena::enemyTurn(){
                 }
                 break;
             case 2:
-                if (enemy->getEenergy() >= enemy->getWeapon()->getEnergyCost())
+                if (enemy->getEenergy() >= enemy->getWeapon()->getEnergyCost()){
+                    if (enemy->getWeapon()->getWepType() == "RocketLauncher")
+                        if (enemy->getWeapon()->isUsed() == true)
+                        {
+                            enValid = false;
+                            choice = rand() % 4;
+                            break;
+                        }
                     enemy->getWeapon()->use(*enemy, *player);
+                }
                 else{
                     enValid = false;
                     choice -=1;
