@@ -160,7 +160,7 @@ void Crossbow::specialEffect(Robot& attacker, Robot& enemy){
 
 //ROCKET LAUNCHER
 
-RocketLauncher::RocketLauncher() : Weapon("Rocket Luncher", 80, 50){used = false;}
+RocketLauncher::RocketLauncher() : Weapon("RocketLauncher", 80, 50){used = false;}
 
 RocketLauncher::RocketLauncher(std::string name) : Weapon(name, 80, 50){used = false; }
 
@@ -204,7 +204,6 @@ void RocketLauncher::use(Robot& attacker, Robot& enemy){
 }
 
 void RocketLauncher::saveToFile(std::ostream& out) const{
-    out << "Rocket Launcher\n";
     Weapon::saveToFile(out);
     out << used << "\n";
 }

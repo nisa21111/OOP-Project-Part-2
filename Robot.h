@@ -43,6 +43,8 @@ public:
     virtual std::string getType() const = 0;
     bool hasSpecialActive() const {return isSpecialActive;}
     void resetSpecialAbility() {isSpecialActive = false;}
+    void setHp(int h);
+    void setEnergy(int h);
 
 };
 

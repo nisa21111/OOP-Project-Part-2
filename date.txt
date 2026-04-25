@@ -1,12 +1,16 @@
 PLAYER
 Tank
 Titan
-600 15 10 200
+480 15 10 170
 LaserGun
 40 20
+HP/ENERGY
+480 170
 ENEMY
-Tank
-Titan
-600 15 10 200
-Crossbow
-50 30
+Assasin
+Flash
+255 20 30 90
+LaserGun
+40 20
+HP/ENERGY
+255 90

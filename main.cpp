@@ -149,24 +149,38 @@ int main(){
             }
             case 6:{
                 std::ifstream in("date.txt");
-
+                int hp, energy;
                 std::string label;
+
                 in >> label;
+
                 player = createRobotFromFile(in);
                 Weapon* pw = createWeaponFromFile(in);
                 player->equipWeapon(pw);
 
                 in >> label;
+                in >> hp >> energy;
+
+                player->setEnergy(energy);
+                player->setHp(hp);
+
+                in >> label;
+
                 Robot* enemy = createRobotFromFile(in);
                 Weapon* ew = createWeaponFromFile(in);
                 enemy->equipWeapon(ew);
 
+                in >> label;
+                in >> hp >> energy;
+
+                enemy->setHp(hp);
+                enemy->setEnergy(energy);
+
                 Arena arena(player, enemy);
                 arena.start();
-
                 delete player;
                 delete enemy;
-                break;
+                break; 
             }
             default:{
                 std::cout << "Invalid option\n";

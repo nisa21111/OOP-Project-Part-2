@@ -68,6 +68,14 @@ std::ostream& operator<<(std::ostream& os, const Robot& r){
     return os;
 }
 
+void Robot::setHp(int h){
+    hp = h;
+}
+
+void Robot::setEnergy(int e){
+    energy = e;
+}
+
 std::istream& operator>>(std::istream& is, Robot& r){
     std::cout << "Name: ";
     is >> r.name;
@@ -97,8 +105,8 @@ void Robot::recoverEnergy(int amount){
 }
 
 void Robot::equipWeapon(Weapon* w){
-    if (weapon == w) return;
-    delete weapon;
+    if (weapon != w)
+        delete weapon;
     weapon = w;
 }
 

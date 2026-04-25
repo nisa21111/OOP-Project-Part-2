@@ -188,11 +188,17 @@ void Arena::saveGame(){
     player->saveToFile(out);
     if (player->getWeapon())
         player->getWeapon()->saveToFile(out);
+        
+    out << "HP/ENERGY\n";
+    out << player->getHp() << " " << player->getEenergy() << "\n";
 
     out << "ENEMY\n";
     enemy->saveToFile(out);
     if (enemy->getWeapon())
         enemy->getWeapon()->saveToFile(out);
+
+    out << "HP/ENERGY\n";
+    out << enemy->getHp() << " " << enemy->getEenergy() << "\n";
 
     out.close();
     std::cout << "GAME SAVED!!\n";
