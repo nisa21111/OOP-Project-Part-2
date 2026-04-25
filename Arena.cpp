@@ -3,17 +3,30 @@
 Arena::Arena(Robot* p, Robot* e){
     player = p;
     enemy = e;
-    turnCounter = 0;
+    playerCounter = 0;
+    enemyCounter = 0;
 }
 
 void Arena::start(){
     while(!isGameOver()){
-        turnCounter++;
+        playerCounter++;
 
         playerTurn();
+        if (playerCounter >= getInterval(player)){
+            std::cout << "Speed bonus!!!\n";
+            playerCounter = 0;
+            playerTurn();
+        }
+
         if (isGameOver()) break;
 
+        enemyCounter++;
         enemyTurn();
+        if (enemyCounter >= getInterval(enemy)){
+            std::cout << "Enemy speed bonus! They get an extra round!\n";
+            enemyCounter = 0;
+            enemyTurn();
+        }
     }
 
     if (player -> getHp() <= 0)
@@ -22,7 +35,7 @@ void Arena::start(){
         std::cout << player->getName() << " defeats " << enemy->getName() << "! WOW! " << player->getName() << " won!\n";
 }
 
-int getInterval(Robot* r){
+int Arena::getInterval(Robot* r){
     return std::max(2, 6 - r->getSpeed() / 10);
 }
 

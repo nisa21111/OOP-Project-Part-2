@@ -10,7 +10,8 @@ private:
     Robot* player;
     Robot* enemy;
 
-    int turnCounter;
+    int playerCounter;
+    int enemyCounter;
 
 public:
     Arena(Robot* p, Robot* e);
@@ -18,6 +19,7 @@ public:
     void start();
 
 private:
+    int getInterval(Robot* r);
     void playerTurn();
     void enemyTurn();
     bool isGameOver();
