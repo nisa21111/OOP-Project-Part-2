@@ -17,6 +17,7 @@ public:
     Arena(Robot* p, Robot* e);
 
     void start();
+    void saveGame();
 
 private:
     int getInterval(Robot* r);

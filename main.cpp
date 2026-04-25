@@ -30,6 +30,40 @@ Weapon* generateRandomWeapon(){
     }
 }
 
+Robot* createRobotFromFile(std::istream& in){
+    std::string type;
+    in >> type;
+    Robot* r = nullptr;
+    if (type == "Tank") r = new Tank();
+    else if (type == "Assasin") r = new Assasin();
+    else if (type == "Sniper") r = new Sniper();
+    else{
+        std::cout << "Unknown robot type: " << type << "\n";
+        return nullptr;
+    }
+
+    r->loadFromFile(in);
+    return r;
+}
+
+Weapon* createWeaponFromFile(std::istream& in){
+    std::string type;
+    in >> type;
+
+    Weapon* w = nullptr;
+
+    if (type == "LaserGun") w = new LaserGun();
+    else if (type == "Crossbow") w = new Crossbow();
+    else if (type == "RocketLauncher") w = new RocketLauncher();
+    else{
+        std::cout << "Unknown Weapon type: " << type << "\n";
+        return nullptr;
+    }
+
+    w->loadFromFile(in);
+    return w;
+}
+
 int main(){
     srand(time(0));
 
@@ -38,6 +72,7 @@ int main(){
 
     bool running = true;
 
+
     while (running){
         std::cout << "\nWealcome to Robot Battle Arena\n";
         std::cout << "1. Choose your Robot\n";
@@ -45,6 +80,7 @@ int main(){
         std::cout << "3. Start the Battle\n";
         std::cout << "4. Info\n";
         std::cout << "5. Exit\n";
+        std::cout << "6. Load Game\n";
 
         int choice;
         std::cout << "\nYour choide: ";
@@ -111,11 +147,33 @@ int main(){
                 running = false;
                 break;
             }
+            case 6:{
+                std::ifstream in("date.txt");
+
+                std::string label;
+                in >> label;
+                player = createRobotFromFile(in);
+                Weapon* pw = createWeaponFromFile(in);
+                player->equipWeapon(pw);
+
+                in >> label;
+                Robot* enemy = createRobotFromFile(in);
+                Weapon* ew = createWeaponFromFile(in);
+                enemy->equipWeapon(ew);
+
+                Arena arena(player, enemy);
+                arena.start();
+
+                delete player;
+                delete enemy;
+                break;
+            }
             default:{
                 std::cout << "Invalid option\n";
             }
         }
     }
+
     delete player;
     delete playerWeapon;
 

@@ -9,6 +9,7 @@ Robot::Robot(){
     energy = 200;
     weapon = nullptr;
     isSpecialActive = false;
+    weapon = nullptr;
 }
 
 Robot::Robot(std::string n, int hp, int sp, int dmg, int en){
@@ -19,6 +20,7 @@ Robot::Robot(std::string n, int hp, int sp, int dmg, int en){
     energy = en;
     weapon = nullptr;
     isSpecialActive = false;
+    weapon = nullptr;
 }
 
 Robot::Robot(const Robot& other) {
@@ -29,7 +31,7 @@ Robot::Robot(const Robot& other) {
     energy = other.energy;
     isSpecialActive = other.isSpecialActive;
 
-    weapon = other.weapon;
+    weapon = nullptr;
 }
 
 Robot& Robot::operator=(const Robot& other){
@@ -41,12 +43,13 @@ Robot& Robot::operator=(const Robot& other){
         energy = other.energy;
         isSpecialActive = other.isSpecialActive;
 
-        weapon = other.weapon;
+        weapon = nullptr;
     }
     return *this;
 }
 
 Robot::~Robot(){
+    delete weapon;
     weapon = nullptr;
 }
 
@@ -94,6 +97,8 @@ void Robot::recoverEnergy(int amount){
 }
 
 void Robot::equipWeapon(Weapon* w){
+    if (weapon == w) return;
+    delete weapon;
     weapon = w;
 }
 

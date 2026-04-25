@@ -1,0 +1,12 @@
+PLAYER
+Tank
+Titan
+600 15 10 200
+LaserGun
+40 20
+ENEMY
+Tank
+Titan
+600 15 10 200
+Crossbow
+50 30

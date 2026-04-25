@@ -69,6 +69,7 @@ void Arena::playerTurn(){
         std::cout << "40 energy !DOES NOT FINISH YOUR ROUND!)\n";
         std::cout << "4. Skip round (+15 energy)\n";
         std::cout << "5. Forfeit\n"; 
+        std::cout << "6. Save and exit\n";
 
         std::cout << "\nYour choice: ";
         std::cin >> option;
@@ -99,6 +100,9 @@ void Arena::playerTurn(){
             case 5:
                 player->takeDamage(9999);
                 break;
+            case 6:
+                saveGame();
+                exit(0);
             default:
                 valid = false;
                 break;   
@@ -174,4 +178,22 @@ void Arena::enemyTurn(){
 
 bool Arena::isGameOver(){
     return player->getHp() <= 0 || enemy->getHp() <= 0;
+}
+
+
+void Arena::saveGame(){
+    std::ofstream out("date.txt");
+
+    out << "PLAYER\n";
+    player->saveToFile(out);
+    if (player->getWeapon())
+        player->getWeapon()->saveToFile(out);
+
+    out << "ENEMY\n";
+    enemy->saveToFile(out);
+    if (enemy->getWeapon())
+        enemy->getWeapon()->saveToFile(out);
+
+    out.close();
+    std::cout << "GAME SAVED!!\n";
 }

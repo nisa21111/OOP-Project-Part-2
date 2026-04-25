@@ -53,9 +53,17 @@ std::istream& operator>>(std::istream& in, Weapon& w){
     return in;
 }
 
+void Weapon::saveToFile(std::ostream& out) const{
+    out << name << "\n";
+    out << damage << " " << energyCost << "\n";
+}
+
+void Weapon::loadFromFile(std::istream& in){
+    in >> damage >> energyCost;
+}
 //LASER GUN
 
-LaserGun::LaserGun() : Weapon("Laser Gun", 40, 20){}
+LaserGun::LaserGun() : Weapon("LaserGun", 40, 20){}
 
 LaserGun::LaserGun(std::string name) : Weapon(name, 40, 20){}
 
@@ -193,4 +201,15 @@ void RocketLauncher::use(Robot& attacker, Robot& enemy){
     enemy.takeDamage(damage);
     used = true;
     std::cout << attacker.getName() << " uses Rocket Launcher and deals " << damage << " damage! You can no longer use the Rocket Launcher.\n";
+}
+
+void RocketLauncher::saveToFile(std::ostream& out) const{
+    out << "Rocket Launcher\n";
+    Weapon::saveToFile(out);
+    out << used << "\n";
+}
+
+void RocketLauncher::loadFromFile(std::istream& in){
+    Weapon::loadFromFile(in);
+    in >> used;
 }

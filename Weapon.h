@@ -24,6 +24,9 @@ public:
     friend std::ostream& operator<<(std::ostream& os, const Weapon& w);
     friend std::istream& operator>>(std::istream& in, Weapon& w);
 
+    virtual void saveToFile(std::ostream& out) const;
+    virtual void loadFromFile(std::istream& in);
+
     virtual void use(Robot& attacker, Robot& enemy) = 0;
 
     std::string getName() const {return name;}
@@ -78,6 +81,9 @@ public:
 
     friend std::ostream& operator<<(std::ostream& os, const RocketLauncher& rl);
     friend std::istream& operator>>(std::istream& in, RocketLauncher& rl);
+
+    void saveToFile(std::ostream& out) const override;
+    void loadFromFile(std::istream& in) override;
 
     void use(Robot& attacker, Robot& enemy) override;
     bool isUsed() const override {return used;}
