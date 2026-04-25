@@ -41,6 +41,8 @@ void Tank::attack(Robot& enemy){
     }
 
     energy -= 10;
+    if (enemy.getHp() < 0)
+        throw std::logic_error("Enemy already dead");
     enemy.takeDamage(damage);
     std::cout << name << " attacks " << enemy.getName() << " for " << damage << " damage!\n";
 }
@@ -58,6 +60,8 @@ void Tank::useSpecialAbility(){
 }
 
 void Tank::takeDamage(int amount){
+    if (amount < 0)
+        throw std::invalid_argument("Damage cannot be negative");
     if (isSpecialActive == true){
         amount /= 2;
         isSpecialActive = false;

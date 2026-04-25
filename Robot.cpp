@@ -13,6 +13,8 @@ Robot::Robot(){
 }
 
 Robot::Robot(std::string n, int hp, int sp, int dmg, int en){
+    if (hp <= 0 || sp < 0 || dmg < 0 || en < 0)
+        throw std::invalid_argument("Invalid robot stats");
     name = n;
     this -> hp = hp;
     speed = sp;
@@ -69,10 +71,14 @@ std::ostream& operator<<(std::ostream& os, const Robot& r){
 }
 
 void Robot::setHp(int h){
+    if (hp < 0)
+        throw std::invalid_argument("HP cannot be negative");
     hp = h;
 }
 
 void Robot::setEnergy(int e){
+    if (e < 0)
+        throw std::invalid_argument("Energy cannot be negative");
     energy = e;
 }
 
@@ -96,15 +102,22 @@ std::istream& operator>>(std::istream& is, Robot& r){
 }
 
 void Robot::takeDamage(int amount){
+    if (amount < 0)
+        throw std::invalid_argument("Damage cannot be negative");
     hp -= amount;
     if (hp < 0) hp = 0;
  }
 
 void Robot::recoverEnergy(int amount){
-    energy+=amount;
+    if (energy + amount < 0)
+        energy = 0;
+    else
+        energy+=amount;
 }
 
 void Robot::equipWeapon(Weapon* w){
+    if (w == nullptr)
+        throw std::invalid_argument("Weapon cannot be null");
     if (weapon != w)
         delete weapon;
     weapon = w;
@@ -117,7 +130,10 @@ void Robot::saveToFile(std::ostream& out) const {
 }
 
 void Robot::loadFromFile(std::istream& in){
-    in >> name;
-    in >> hp >> damage >> speed >> energy;
+    if (!(in >> name >> hp >> damage >> speed >> energy))
+        throw std::runtime_error("Invalid robot file fromat");
+
+    if (hp < 0 || speed < 0 || damage < 0 || energy < 0)
+        throw std::runtime_error("Corrupted robot data");
 }
 

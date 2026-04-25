@@ -41,6 +41,8 @@ void Assasin::attack(Robot& enemy){
         return;
     }
     energy -= 10;
+    if (enemy.getHp() < 0)
+        throw std::logic_error("Enemy already dead");
     enemy.takeDamage(damage);
     std::cout << name << " attacks " << enemy.getName() << " for "<< damage << " damage!\n";
 }

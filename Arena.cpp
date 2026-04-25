@@ -8,31 +8,36 @@ Arena::Arena(Robot* p, Robot* e){
 }
 
 void Arena::start(){
-    while(!isGameOver()){
-        playerCounter++;
+    try{
+        while(!isGameOver()){
+            playerCounter++;
 
-        playerTurn();
-        if (playerCounter >= getInterval(player)){
-            std::cout << "Speed bonus!!!\n";
-            playerCounter = 0;
             playerTurn();
-        }
+            if (playerCounter >= getInterval(player)){
+                std::cout << "Speed bonus!!!\n";
+                playerCounter = 0;
+                playerTurn();
+            }
 
-        if (isGameOver()) break;
+            if (isGameOver()) break;
 
-        enemyCounter++;
-        enemyTurn();
-        if (enemyCounter >= getInterval(enemy)){
-            std::cout << "Enemy speed bonus! They get an extra round!\n";
-            enemyCounter = 0;
+            enemyCounter++;
             enemyTurn();
+            if (enemyCounter >= getInterval(enemy)){
+                std::cout << "Enemy speed bonus! They get an extra round!\n";
+                enemyCounter = 0;
+                enemyTurn();
+            }
         }
-    }
 
-    if (player -> getHp() <= 0)
-        std::cout << enemy->getName() << " defeats " << player->getName() << "! WOW! " << enemy->getName() << " won!\n";
-    else
-        std::cout << player->getName() << " defeats " << enemy->getName() << "! WOW! " << player->getName() << " won!\n";
+        if (player -> getHp() <= 0)
+            std::cout << enemy->getName() << " defeats " << player->getName() << "! WOW! " << enemy->getName() << " won!\n";
+        else
+            std::cout << player->getName() << " defeats " << enemy->getName() << "! WOW! " << player->getName() << " won!\n";
+    }
+    catch (const std::exception& e){
+        std::cout << "ARENA ERROR: " << e.what() << "\n";
+    }
 }
 
 int Arena::getInterval(Robot* r){
@@ -118,6 +123,8 @@ void Arena::playerTurn(){
 }
 
 void Arena::enemyTurn(){
+    if (!enemy)
+        throw std::runtime_error("Enemy is null");
     bool enValid = false;
     int choice = rand() % 4;
     while (!enValid){
@@ -148,6 +155,8 @@ void Arena::enemyTurn(){
                 }
                 break;
             case 2:
+                if(!enemy->getWeapon())
+                    throw std::runtime_error("Enemy has no weapon!");
                 if (enemy->getEenergy() >= enemy->getWeapon()->getEnergyCost()){
                     if (enemy->getWeapon()->getWepType() == "RocketLauncher")
                         if (enemy->getWeapon()->isUsed() == true)
@@ -156,6 +165,8 @@ void Arena::enemyTurn(){
                             choice = rand() % 4;
                             break;
                         }
+                    if(!enemy->getWeapon())
+                        throw std::runtime_error("Weapon null before use");
                     enemy->getWeapon()->use(*enemy, *player);
                 }
                 else{
@@ -188,7 +199,7 @@ void Arena::saveGame(){
     player->saveToFile(out);
     if (player->getWeapon())
         player->getWeapon()->saveToFile(out);
-        
+
     out << "HP/ENERGY\n";
     out << player->getHp() << " " << player->getEenergy() << "\n";
 

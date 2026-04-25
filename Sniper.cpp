@@ -39,6 +39,8 @@ void Sniper::attack(Robot& enemy){
         std::cout << "Not enough energy!\n";
         return;
     }
+    if (enemy.getHp() < 0)
+        throw std::logic_error("Enemy aready dead!");
     energy -= 10;
     if (isSpecialActive){
         int crit = damage*2;

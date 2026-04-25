@@ -10,6 +10,8 @@ Weapon::Weapon(){
 }
 
 Weapon::Weapon(std::string name, int dmg, int  ec){
+    if (dmg < 0 || ec < 0)
+        throw std::invalid_argument("Weapon stats cannot be negative");
     this -> name = name;
     damage = dmg;
     energyCost = ec;
@@ -59,7 +61,10 @@ void Weapon::saveToFile(std::ostream& out) const{
 }
 
 void Weapon::loadFromFile(std::istream& in){
-    in >> damage >> energyCost;
+    if(!(in >> damage >> energyCost))
+        throw std::runtime_error("Invalid weapon file data");
+    if (damage < 0 || energyCost < 0)
+        throw std::runtime_error("Corrupted weapon values");
 }
 //LASER GUN
 
