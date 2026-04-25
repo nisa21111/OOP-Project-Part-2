@@ -35,7 +35,7 @@ void Arena::playerTurn(){
         valid = true;
         std::cout << "\nYOUR TURN!!!\n";
         std::cout << "Your current energy: " << player->getEenergy() << "\n";
-        std::cout << "Your current HP: " << player->getHp() << " Enemy energy: " << enemy->getEenergy() << "\n";
+        std::cout << "Your current HP: " << player->getHp() << "\n";
         std::cout << "Enemy HP: " << enemy->getHp() << "\n\n";
         std::cout << "1. Basic attack ( deals " << player->getDamage() << " damage and costs 10 energy)\n";
         if (player->getWeapon() != nullptr){
@@ -107,7 +107,7 @@ void Arena::enemyTurn(){
         enValid = true;
         switch (choice){
             case 0:
-                if (enemy->getEenergy() > 10)
+                if (enemy->getEenergy() >= 10)
                     enemy->attack(*player);
                 else {
                     enValid = false;
@@ -120,7 +120,7 @@ void Arena::enemyTurn(){
                     enValid = false;
                 }
                 else {
-                    if (enemy->getEenergy() > 40){
+                    if (enemy->getEenergy() >= 40){
                         enemy->useSpecialAbility();
                         enemyTurn();
                     }
@@ -131,7 +131,7 @@ void Arena::enemyTurn(){
                 }
                 break;
             case 2:
-                if (enemy->getEenergy() > enemy->getWeapon()->getEnergyCost())
+                if (enemy->getEenergy() >= enemy->getWeapon()->getEnergyCost())
                     enemy->getWeapon()->use(*enemy, *player);
                 else{
                     enValid = false;
