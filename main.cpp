@@ -52,7 +52,7 @@ int main(){
 
         switch (choice){
             case 1:{
-                std::cout << "Available Robots:\n1. Tank\n2. Assasin\n3.Sniper\n";
+                std::cout << "Available Robots:\n1. Tank\n2. Assasin\n3. Sniper\n";
                 int r;
                 std::cin >> r;
                 delete player;
@@ -101,7 +101,7 @@ int main(){
                 break;
             }
             case 4:{
-                std::cout << "Welcome! This is a turn-based combat game with robots!\nYour goal is to kill the enemy robot.\n\n There are three typese of robots:\n1. Tanks, they have a lot of hp but don't deal much damage and they are slow.\n2. Assasins, they are very fast and deal slightly more damage than tanks but don't have a lot of hp.\n3. Snipers, they deal a lot of damage and are faster than tanks, but like assasins, they don't have a lot of hp.\n\nEach type of robot has a special ability they can use:\n1. Tanks can activate a shield, taking less damage next time they're attacked.\n2. Assasins can get an extra round.\n3. Snipers can activate crit, dealing more damage the next attack.\n!IMPORTANT! Using an ability does not end the round!\n\nYou can also equip weapons. There are 3 weapons currently:\n1. The Laser Gun, the laser gun is fast and efficient, but doesn't deal a lot of damage (there is also a small chance of getting 5 energy back when using the laser gun).\n2. The Crossbow, it does more damage than the laser gun and costs more energy (there is a small chance of missing your shot).\n3. The Rocket Launcher, it does a lot of damage and costs a lot of energy (it's one-time-use).\n";
+                std::cout << "Welcome! This is a turn-based combat game with robots!\nYour goal is to kill the enemy robot.\n\n There are three typese of robots:\n1. Tanks, they have a lot of hp but don't deal much damage and they are slow.\n2. Assasins, they are very fast and deal slightly more damage than tanks but don't have a lot of hp.\n3. Snipers, they deal a lot of damage and are faster than tanks, but like assasins, they don't have a lot of hp.\n\nEach type of robot has a special ability they can use:\n1. Tanks can activate a shield, taking less damage next time they're attacked.\n2. Assasins can get an extra round.\n3. Snipers can activate crit, dealing more damage the next attack.\n!IMPORTANT! Using an ability does not end the round!\n\nYou can also equip weapons. There are 3 weapons currently:\n1. The Laser Gun, the laser gun is fast and efficient, but doesn't deal a lot of damage (there is also a small chance of getting 5 energy back when using the laser gun).\n2. The Crossbow, it does more damage than the laser gun and costs more energy (there is a small chance of dealing extra damage).\n3. The Rocket Launcher, it does a lot of damage and costs a lot of energy (it's one-time-use).\n";
                 break;
             }
             case 5:{

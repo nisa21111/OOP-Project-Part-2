@@ -90,6 +90,17 @@ void LaserGun::use(Robot& attacker, Robot& enemy){
     enemy.takeDamage(damage);
 
     std::cout << attacker.getName() << " uses Laser Gun and deals " << damage << " damage!\n";
+
+    specialEffect(attacker, enemy);
+}
+
+void LaserGun::specialEffect(Robot& attacker, Robot& enemy){
+    int chance = rand() % 100;
+    if (chance < 15){
+        attacker.recoverEnergy(5);
+        std::cout << "WOW! What efficiency! You recovered 5 energy from the laser gun\n";
+    }
+
 }
 
 //CROSSBOW
@@ -127,8 +138,16 @@ void Crossbow::use(Robot& attacker, Robot& enemy){
 
     attacker.recoverEnergy(-energyCost);
     enemy.takeDamage(damage);
+    specialEffect(attacker, enemy);
 
     std::cout << attacker.getName() << " uses Crossbow and deals " << damage << " damage!\n";
+}
+
+void Crossbow::specialEffect(Robot& attacker, Robot& enemy){
+    if (rand() % 100 < 15){
+        enemy.takeDamage(10);
+        std::cout << "The Crossbow deals 10 extra damage!\n";
+    }
 }
 
 //ROCKET LAUNCHER

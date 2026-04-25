@@ -29,6 +29,7 @@ public:
     std::string getName() const {return name;}
     int getDamage() const {return damage;}
     int getEnergyCost() const {return energyCost;}
+    virtual void specialEffect(Robot& attacker, Robot& enemy){}
 };
 
 class LaserGun : public Weapon {
@@ -43,6 +44,7 @@ public:
     friend std::istream& operator>>(std::istream& in, LaserGun& l);
 
     void use(Robot& attacker, Robot& enemy) override;
+    void specialEffect (Robot& attacker, Robot& enemy) override;
 };
 
 class Crossbow : public Weapon{
@@ -57,6 +59,7 @@ public:
     friend std::istream& operator>>(std::istream& in, Crossbow& c);
 
     void use(Robot& attacker, Robot& enemy) override;
+    void specialEffect(Robot& attacker, Robot& enemy) override;
 };
 
 class RocketLauncher : public Weapon{
